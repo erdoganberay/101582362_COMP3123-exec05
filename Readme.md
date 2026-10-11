@@ -61,10 +61,23 @@ app.use((err,req,res,next) => {
 **6. Explain the Purpose of `express.Router()` in the Code Above.**
 
 - Why is `express.Router()` used in Express.js applications, and how does it benefit the code structure?
+- Answer: `express.Router()` lets you put related routes in their own file and plug them into your app, so your main file stays clean and organized.
 
 **7. Error Handling in Express.js**
 
 - How would you implement error handling in the Express routes to ensure that any issues (such as file not found or server errors) are appropriately handled? Provide an example.
+- Answer:
+```javascript
+app.get('/home', (req, res, next) => {
+	res.sendFile(path.join(__dirname, 'home.html'), (err) => {
+		if (err) return next(err);   // send the error to the error middleware
+	});
+});
+
+```
+ 
+**Explanation:** `next(err)` hands the error to Express, which skips all normal routes and sends it straight to the error-handling middleware that returns the 500 response.
+
 
 ---
 
